@@ -1,4 +1,4 @@
-import { Todo } from './todo';
+import { Todo } from './todo.service';
 
 describe('Todo', () => {
   it('should create an instance', () => {

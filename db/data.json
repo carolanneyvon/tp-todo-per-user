@@ -1,0 +1,38 @@
+{
+  "todos": [
+    {
+      "id": "1",
+      "title": "Faire les courses",
+      "description": "carotte, lait",
+      "categorie": "normal",
+      "done": true,
+      "id_user": "1"
+    },
+    {
+      "id": "2",
+      "title": "Faire le ménages",
+      "description": "salle de bains",
+      "categorie": "important",
+      "done": false,
+      "id_user": "1"
+    },
+    {
+      "id": "3",
+      "title": "Vider le lave vaisselle",
+      "description": "",
+      "categorie": "urgent",
+      "done": true,
+      "id_user": "2"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "name": "John"
+    },
+    {
+      "id": 2,
+      "name": "Doe"
+    }
+  ]
+}

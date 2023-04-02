@@ -1,1 +1,17 @@
-<p>users works!</p>
+<!-- <p>users works!</p> -->
+<!-- <div class="user">
+  <h2>{{user.name}}</h2>
+  <p>{{user.email}}</p>
+</div> -->
+
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Example label</label>
+  <select class="form-select" aria-label="Default select example">
+    <option selected>Open this select menu</option>
+    <option *ngFor="let user of users" [value]="user.id">
+      {{user.lastname}}
+    </option>
+  </select>
+</div>
+
+
