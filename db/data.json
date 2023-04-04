@@ -2,25 +2,22 @@
   "todos": [
     {
       "id": "1",
-      "title": "Faire les courses",
-      "description": "carotte, lait",
-      "categorie": "normal",
+      "text": "Faire les courses",
+      "categorie": "personnel",
       "done": true,
       "id_user": "1"
     },
     {
       "id": "2",
-      "title": "Faire le ménages",
-      "description": "salle de bains",
+      "text": "Faire le ménages",
       "categorie": "important",
       "done": false,
       "id_user": "1"
     },
     {
       "id": "3",
-      "title": "Vider le lave vaisselle",
-      "description": "",
-      "categorie": "urgent",
+      "text": "Préparer réunion",
+      "categorie": "travail",
       "done": true,
       "id_user": "2"
     }

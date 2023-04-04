@@ -1,1 +1,14 @@
 <p>todo-form works!</p>
+<h2>{{ formTitle }}</h2>
+    <form (submit)="onSubmit()">
+      <div>
+        <label>Text:</label>
+        <input [(ngModel)]="text" name="text" required>
+      </div>
+      <div>
+        <label>Category:</label>
+        <input [(ngModel)]="category" name="category" required>
+      </div>
+      <button type="submit">{{ formButton }}</button>
+      <button type="button" (click)="delete()">Cancel</button>
+    </form>
