@@ -12,8 +12,13 @@ import { TodoService } from 'src/app/shared/services/todo.service';
 export class UsersComponent implements OnInit {
   users: User[] = [];
   selectedUser: User | null = null;
+  public userService: UserService;
+  public todoService: TodoService;
   
-  constructor(private userService: UserService, private todoService: TodoService ) { }
+  constructor( userService: UserService, todoService: TodoService ) { 
+    this.userService = userService;
+    this.todoService = todoService;
+  }
   
   // ngOnInit() {
   //   this.userService
@@ -34,11 +39,31 @@ export class UsersComponent implements OnInit {
   }
 
   selectUser(user: User) {
-    this.userService
-    .selectUser(user);
+    this.userService.selectUser(user);
+    //this.selectedUser = user;
+    //this.getTodoForSelectedUser();
+
+    // this.userService.userTodos$.subscribe(todos => {
+    //   this.todoService.filterTodos(todos);
+    //});
   }
 
   onSelectUser() {
-    this.todoService.getTodoByUser(this.selectedUser?.id);
+    //this.todoService.getTodoByUser(this.selectedUser?.id);
+    if (this.selectedUser) {
+      this.selectUser(this.selectedUser);
+    }
   }
+
+  // getTodoForSelectedUser() {
+  //   const selectedUserId = this.selectedUser?.id;
+  //   if (selectedUserId) {
+  //     this.userService
+  //       .getTodoForUser(selectedUserId)
+  //       .subscribe(todos => {
+  //         this.todos = todos;
+  //         this.filteredTodos = todos;
+  //       });
+  //   }
+  // }
 }

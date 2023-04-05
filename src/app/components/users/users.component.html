@@ -2,7 +2,25 @@
 <div>
   <label>Utilisateur:</label>
   <select [(ngModel)]="selectedUser" (change)="onSelectUser()">
+    <!-- <option value="">Selectionner un utilisateur</option> -->
     <option *ngFor="let user of users" [ngValue]="user">{{ user.name }}</option>
   </select>
 </div>
+<ul>
+  <li *ngFor="let todo of userService.userTodos$ | async">{{ todo.text }}</li>
+</ul>
 <!-- <p *ngIf="users.length === 0">Aucun utilisateur trouvé.</p> -->
+<!-- <h3>Tâches à faire:</h3>
+<ul>
+  <li *ngFor="let todo of todoService.filteredTodos">{{ todo.text }}</li>
+</ul>
+
+<h3>Tâches terminées:</h3>
+<ul>
+  <li *ngFor="let todo of todoService.filteredCompletedTodos">{{ todo.text }}</li>
+</ul>
+
+<label for="category-filter">Filtrer par catégorie:</label>
+<select id="category-filter" [(ngModel)]="todoService.filterTodos">
+  <option *ngFor="let category of categories">{{ category }}</option>
+</select> -->

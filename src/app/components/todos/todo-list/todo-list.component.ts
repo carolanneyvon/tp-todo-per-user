@@ -33,29 +33,21 @@ export class TodoListComponent implements OnInit {
       }
     });
 
-    // this.todoService.todos$.subscribe(todos => {
-    //   if (todos) {
-    //     this.todos = todos;
-    //     this.categories = [...new Set(this.todos.map(todo => todo.category || '').filter(Boolean))];
-    //     this.getTodoByCategory();
-    //   }
-    // });
-
     //combineLatest permet de combiner les observables (todos$ et selectedUsers$)
     combineLatest([this.todoService.todos$, this.userService.selectedUser$])
       .subscribe(([todos, user]) => {
-        // if (todos && user) {
-        //   this.todos = todos.filter(todo => todo.id_user === user.id);
-        //   this.categories = [...new Set(this.todos.map(todo => todo.category || '').filter(Boolean))];
-        //   this.getTodoByCategory();
-        // }
         if (todos && user) {
-          this.todoService.getTodoByCategoryAndUser(this.categoryFilter, user.id).subscribe(filteredTodos => {
-            this.todos = filteredTodos;
-            this.categories = [...new Set(this.todos.map(todo => todo.category || '').filter(Boolean))];
-            this.getTodoByCategory();
-          });
+          this.todos = todos.filter(todo => todo.id_user === user.id);
+          this.categories = [...new Set(this.todos.map(todo => todo.category || '').filter(Boolean))];
+          this.getTodoByCategory();
         }
+        // if (todos && user) {
+        //   this.todoService.getTodoByCategoryAndUser(this.categoryFilter, user.id).subscribe(filteredTodos => {
+        //     this.todos = filteredTodos;
+        //     this.categories = [...new Set(this.todos.map(todo => todo.category || '').filter(Boolean))];
+        //     this.getTodoByCategory();
+        //   });
+        // }
       });
   }
 

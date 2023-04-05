@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap, map } from 'rxjs';
 import { Todo } from 'src/app/shared/models/todo';
 import { environment } from 'src/environments/environment';
 
@@ -12,8 +12,6 @@ export class TodoService {
 
   private _baseUrl = environment.baseUrl + '/todos';
   public todos$ = new BehaviorSubject<Todo[]>([]);
-  // private todoSubject = new BehaviorSubject<Todo[]>([]);
-  // todos$ = this.todoSubject.asObservable();
 
   constructor(private _http: HttpClient) { 
     this.findAll();
@@ -23,8 +21,8 @@ export class TodoService {
   public findAll() {
     this._http
     .get<Todo[]>(this._baseUrl)
-    .subscribe(todosFromApi => { //observable, il faut donc s'abonner, fonction qui récupère toutes les todos à la connexion
-      this.todos$.next(todosFromApi)//met à jour le BehaviorSubject
+    .subscribe(todosFromApi => { 
+      this.todos$.next(todosFromApi)
     });
   }
 
@@ -80,5 +78,24 @@ export class TodoService {
         .delete(url)
         .subscribe(() => this.findAll());
     }
+  }
+
+  //Filter todos for pending (à faire) or completed (terminées)
+  public filterTodos(todos: Todo[]) {
+    const pendingTodos = todos.filter(todo => todo.done === false);
+    const completedTodos = todos.filter(todo => todo.done === true);
+    this.todos$.next([ ...pendingTodos, ...completedTodos ]);
+  }
+
+  //GET todos for user
+  getTodosForUser(id_user: string) {
+    return this.todos$.pipe(
+      map(todos => todos.filter(todo => todo.id_user === id_user))
+    );
+  }
+
+  public filterTodosByUser(todos: Todo[], id_user: string) {
+    const todosForUser = todos.filter(todo => todo.id_user === id_user);
+    this.todos$.next(todosForUser);
   }
 }
